@@ -15,6 +15,11 @@
 		197C21131C6686EF00BCCAE8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 197C21111C6686EF00BCCAE8 /* Main.storyboard */; };
 		197C21151C6686EF00BCCAE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 197C21141C6686EF00BCCAE8 /* Assets.xcassets */; };
 		197C21181C6686EF00BCCAE8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 197C21161C6686EF00BCCAE8 /* LaunchScreen.storyboard */; };
+		953BC8EE24747F39008FABE6 /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953BC8ED24747F39008FABE6 /* ProductsViewController.swift */; };
+		953BC8F5247480CB008FABE6 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953BC8F3247480CB008FABE6 /* ProductCell.swift */; };
+		953BC8F6247480CB008FABE6 /* ProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 953BC8F4247480CB008FABE6 /* ProductCell.xib */; };
+		953BC8F8247486E9008FABE6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953BC8F7247486E9008FABE6 /* HomeViewController.swift */; };
+		953BC8FA247496CB008FABE6 /* UserContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953BC8F9247496CB008FABE6 /* UserContactViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +33,11 @@
 		197C21141C6686EF00BCCAE8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		197C21171C6686EF00BCCAE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		197C21191C6686EF00BCCAE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		953BC8ED24747F39008FABE6 /* ProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewController.swift; sourceTree = "<group>"; };
+		953BC8F3247480CB008FABE6 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
+		953BC8F4247480CB008FABE6 /* ProductCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductCell.xib; sourceTree = "<group>"; };
+		953BC8F7247486E9008FABE6 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		953BC8F9247496CB008FABE6 /* UserContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserContactViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,11 +74,16 @@
 				197C210F1C6686EE00BCCAE8 /* ProductViewController.swift */,
 				19155F481C6AB48B00644FDF /* ContactViewController.swift */,
 				19155F4A1C6C58FA00644FDF /* ProductsTableViewController.swift */,
+				953BC8ED24747F39008FABE6 /* ProductsViewController.swift */,
+				953BC8F7247486E9008FABE6 /* HomeViewController.swift */,
+				953BC8F9247496CB008FABE6 /* UserContactViewController.swift */,
 				19155F4C1C6DA38100644FDF /* Product.swift */,
 				197C21111C6686EF00BCCAE8 /* Main.storyboard */,
 				197C21141C6686EF00BCCAE8 /* Assets.xcassets */,
 				197C21161C6686EF00BCCAE8 /* LaunchScreen.storyboard */,
 				197C21191C6686EF00BCCAE8 /* Info.plist */,
+				953BC8F3247480CB008FABE6 /* ProductCell.swift */,
+				953BC8F4247480CB008FABE6 /* ProductCell.xib */,
 			);
 			path = Sneakersell;
 			sourceTree = "<group>";
@@ -133,6 +148,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				197C21181C6686EF00BCCAE8 /* LaunchScreen.storyboard in Resources */,
+				953BC8F6247480CB008FABE6 /* ProductCell.xib in Resources */,
 				197C21151C6686EF00BCCAE8 /* Assets.xcassets in Resources */,
 				197C21131C6686EF00BCCAE8 /* Main.storyboard in Resources */,
 			);
@@ -145,10 +161,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				953BC8EE24747F39008FABE6 /* ProductsViewController.swift in Sources */,
 				197C21101C6686EE00BCCAE8 /* ProductViewController.swift in Sources */,
 				19155F4B1C6C58FA00644FDF /* ProductsTableViewController.swift in Sources */,
+				953BC8F8247486E9008FABE6 /* HomeViewController.swift in Sources */,
+				953BC8FA247496CB008FABE6 /* UserContactViewController.swift in Sources */,
 				19155F4D1C6DA38100644FDF /* Product.swift in Sources */,
 				197C210E1C6686EE00BCCAE8 /* AppDelegate.swift in Sources */,
+				953BC8F5247480CB008FABE6 /* ProductCell.swift in Sources */,
 				19155F491C6AB48B00644FDF /* ContactViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -287,7 +307,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Sneakersell/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = CSC642;
+				PRODUCT_BUNDLE_IDENTIFIER = CSC690;
 				PRODUCT_NAME = Sneakersell;
 				SWIFT_VERSION = 5.0;
 			};
@@ -299,7 +319,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Sneakersell/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = CSC642;
+				PRODUCT_BUNDLE_IDENTIFIER = CSC690;
 				PRODUCT_NAME = Sneakersell;
 				SWIFT_VERSION = 5.0;
 			};

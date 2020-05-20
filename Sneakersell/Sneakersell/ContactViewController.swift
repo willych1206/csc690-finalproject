@@ -13,6 +13,7 @@ class ContactViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    self.navigationController?.navigationBar.isHidden = true
     view.addSubview(scrollView)
   }
   
