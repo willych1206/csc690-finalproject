@@ -4,22 +4,33 @@
 //
 
 import UIKit
+import FirebaseDatabase
+import Kingfisher
 
 class ProductsViewController: UIViewController {
 
     @IBOutlet weak var tblViewProducts: UITableView!
     @IBOutlet weak var imgNavBar: UIImageView!
     
+    var ref: DatabaseReference!
     var products: [Product]?
+    var sneakers : [Sneaker] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.configureProducts()
+        //self.configureProducts()
+        self.ref = Database.database().reference()
         self.configureTableView()
+        self.callSneakers()
+        self.registerNotification()
     }
     
     override func viewDidLayoutSubviews() {
         self.imgNavBar.layer.cornerRadius = 20
+    }
+    
+    func registerNotification(){
+        NotificationCenter.default.addObserver(self, selector: #selector(callSneakers), name: Notification.Name.CallSneakersNotification, object: nil)
     }
     
     func configureProducts(){
@@ -29,6 +40,41 @@ class ProductsViewController: UIViewController {
           Product(name: "Yeezy Basketball 'Quantum'", cellImageName: "image-cell3", fullscreenImageName: "phone-fullscreen3"),
           Product(name: "Air Jordan 6 Retro 'Infrared' 2019", cellImageName: "image-cell4", fullscreenImageName: "phone-fullscreen4")
         ]
+    }
+    
+    @objc func callSneakers(){
+        self.sneakers.removeAll()
+        Common.shared.showLoader(self)
+        ref.child("sneaker").observeSingleEvent(of: .value, with: { (snapshot) in
+            Common.shared.dismissLoader()
+            let value = snapshot.value as? [String: Any]
+            guard let places = value else {
+                return
+            }
+            
+            for each in places {
+                /*Mark: Parsing Data*/
+                
+                let dict = each.value as? NSMutableDictionary
+                let sneakerId = dict?.value(forKey: "SneakerId") as? String
+                let sneakerName = dict?.value(forKey: "SneakerName") as? String
+                let sneakerSize = dict?.value(forKey: "SneakerSize") as? String
+                let sneakerPrice = dict?.value(forKey: "SneakerPrice") as? String
+                let sneakerImage = dict?.value(forKey: "SneakerImage") as? String
+                let phoneNumber = dict?.value(forKey: "PhoneNumber") as? String
+                
+                
+                let sneaker = Sneaker(SneakerId: sneakerId, SneakerName: sneakerName, SneakerSize: sneakerSize, SneakerPrice: sneakerPrice, SneakerImage: sneakerImage, PhoneNumber: phoneNumber ?? "")
+                self.sneakers.append(sneaker)
+                
+            }
+            self.tblViewProducts.reloadData()
+            
+        }) { (error) in
+            //handle error case
+            Common.shared.showAlert(withTitle: "Error", andMessage: "Something Went Wrong", andVc: self)
+            return
+        }
     }
     
     func configureTableView(){
@@ -44,22 +90,30 @@ class ProductsViewController: UIViewController {
         self.navigationController?.pushViewController(vc!, animated: true)
     }
     
+    @IBAction func postPressed(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "PostViewController")
+        self.navigationController?.pushViewController(vc!, animated: true)
+    }
+    
+    
     
 }
 
 extension ProductsViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.products!.count
+        return self.sneakers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProductCell", for: indexPath) as? ProductCell
         
-        let product = self.products![indexPath.row]
+        let sneaker = self.sneakers[indexPath.row]
         
-        cell?.lblProduct.text = product.name
-        cell?.imgViewProduct.image = UIImage(named: product.cellImageName!)
+        cell?.lblProduct.text = sneaker.SneakerName
+        let imgUrl = URL(string: sneaker.SneakerImage)
+        cell?.imgViewProduct.kf.setImage(with: imgUrl)
+        
         
         return cell!
     }
@@ -71,10 +125,17 @@ extension ProductsViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ProductViewController") as? ProductViewController
+//
+//        let product = self.products![indexPath.row]
+//        vc?.product = product
         
-        let product = self.products![indexPath.row]
-        vc?.product = product
+        let sneaker = self.sneakers[indexPath.row]
+        vc?.sneaker = sneaker
         
         self.navigationController?.pushViewController(vc!, animated: true)
     }
+}
+
+extension Notification.Name {
+    static let CallSneakersNotification = Notification.Name("CallSneakersNotification")
 }
